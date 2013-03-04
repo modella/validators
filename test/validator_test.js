@@ -1,4 +1,4 @@
-var modella = require('modella'),
+var modella    = require('modella'),
     validators = require('../index.js');
 
 describe("required", function() {
@@ -19,6 +19,29 @@ describe("required", function() {
   });
 
   it("does nothing if the field is present", function() {
+    var user = new User({email: 'test@gmail.com'});
+    user.isValid().should.eq(true);
+  });
+});
+
+describe("type", function() {
+  var User = modella('user').attr('email', { type: 'string' })
+  User.use(validators);
+
+  it("breaks #isValid() if the field is the wrong type", function () {
+    var user = new User({email: 123});
+    user.isValid().should.eq(false);
+  });
+
+  it("populates #errors() if the field is the wrong type", function() {
+    var user = new User({email: 123});
+    user.isValid();
+    user.errors.length.should.eq(1);
+    user.errors[0].attr.should.eq('email');
+    user.errors[0].message.should.eq('should be a string');
+  });
+
+  it("does nothing if the field is the right type", function() {
     var user = new User({email: 'test@gmail.com'});
     user.isValid().should.eq(true);
   });
