@@ -1,0 +1,26 @@
+{
+  "name": "model-validators",
+  "version": "0.0.0",
+  "description": "Model Validators for Modella",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:rschmukler/model-validators.git"
+  },
+  "keywords": [
+    "modella",
+    "validators",
+    "validations"
+  ],
+  "author": "Ryan Schmukler",
+  "license": "BSD",
+  "dependencies": {
+    "modella": "~0.0.8"
+  },
+  "devDependencies": {
+    "chai": "~1.5.0"
+  }
+}
