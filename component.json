@@ -4,10 +4,15 @@
   "description": "Validators for modella",
   "version": "0.0.1",
   "keywords": [],
-  "dependencies": {},
+  "dependencies": {
+    'matthewmueller/modella': '*'
+  },
   "development": {},
   "license": "MIT",
   "scripts": [
-    "index.js"
+    "index.js",
+    "lib/format.js",
+    "lib/required.js",
+    "lib/type.js",
   ]
 }
