@@ -2,7 +2,7 @@
   "name": "model-validators",
   "repo": "rschmukler/model-validators",
   "description": "Validators for modella",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "keywords": [],
   "dependencies": {
     'matthewmueller/modella': '*'

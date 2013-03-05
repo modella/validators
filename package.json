@@ -1,6 +1,6 @@
 {
   "name": "model-validators",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Model Validators for Modella",
   "main": "index.js",
   "scripts": {
