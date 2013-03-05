@@ -28,7 +28,7 @@ object.
 
 Validates the field against the given regular expression
 
-    var User = User.attr('name', {format: /\w+ \w+});
+    var User = User.attr('name', {format: /\w+ \w+/ });
 
 
 ### Phone Number
