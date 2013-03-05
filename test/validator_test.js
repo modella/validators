@@ -2,16 +2,16 @@ var modella    = require('modella'),
     validators = require('../index.js');
 
 describe("required", function() {
-  var User = modella('user').attr('email', { required: true })
-  User.use(validators);
+  var requiredUser = modella('user').attr('email', { required: true })
+  requiredUser.use(validators);
 
   it("breaks #isValid() if the field is blank", function() {
-    var user = new User;
+    var user = new requiredUser;
     user.isValid().should.eq(false);
   });
 
   it("populates #errors() if the field is blank", function() {
-    var user = new User;
+    var user = new requiredUser;
     user.isValid();
     user.errors.length.should.eq(1);
     user.errors[0].attr.should.eq('email');
@@ -19,22 +19,22 @@ describe("required", function() {
   });
 
   it("does nothing if the field is present", function() {
-    var user = new User({email: 'test@gmail.com'});
+    var user = new requiredUser({email: 'test@gmail.com'});
     user.isValid().should.eq(true);
   });
 });
 
 describe("type", function() {
-  var User = modella('user').attr('email', { type: 'string' })
-  User.use(validators);
+  var typeUser = modella('user').attr('email', { type: 'string' })
+  typeUser.use(validators);
 
   it("breaks #isValid() if the field is the wrong type", function () {
-    var user = new User({email: 123});
+    var user = new typeUser({email: 123});
     user.isValid().should.eq(false);
   });
 
   it("populates #errors() if the field is the wrong type", function() {
-    var user = new User({email: 123});
+    var user = new typeUser({email: 123});
     user.isValid();
     user.errors.length.should.eq(1);
     user.errors[0].attr.should.eq('email');
@@ -42,7 +42,53 @@ describe("type", function() {
   });
 
   it("does nothing if the field is the right type", function() {
-    var user = new User({email: 'test@gmail.com'});
+    var user = new typeUser({email: 'test@gmail.com'});
+    user.isValid().should.eq(true);
+  });
+});
+
+describe("format", function() {
+  var formatUser = modella('user').attr('email', { format: /\w+@\w+\.com/ });
+  formatUser.use(validators);
+
+  it("breaks #isValid() if the field does not match", function() {
+    var user = new formatUser({email: 'test'});
+    user.isValid().should.eq(false)
+  });
+
+  it("populates #errors() if the field does not match", function() {
+    var user = new formatUser({email: 'test'});
+    user.isValid();
+    user.errors.length.should.eq(1);
+    user.errors[0].attr.should.eq('email');
+    user.errors[0].message.should.eq('does not match format');
+  });
+
+  it("does nothing if the field matches", function() {
+    var user = new formatUser({email: 'test@gmail.com'});
+    user.isValid().should.eq(true);
+  });
+});
+
+describe("email_format", function() {
+  var emailFormatUser = modella('user').attr('email', { email_format: true });
+  emailFormatUser.use(validators);
+
+  it("breaks #isValid() if the field is not an email address", function() {
+    var user = new emailFormatUser({email: 'test'});
+    user.isValid().should.eq(false)
+  });
+
+  it("populates #errors() if the field is not an email address", function() {
+    var user = new emailFormatUser({email: 'test'});
+    user.isValid();
+    user.errors.length.should.eq(1);
+    user.errors[0].attr.should.eq('email');
+    user.errors[0].message.should.eq('is not a valid email address');
+  });
+
+  it("does nothing if the field is an email address", function() {
+    var user = new emailFormatUser({email: 'test@gmail.com'});
     user.isValid().should.eq(true);
   });
 });
