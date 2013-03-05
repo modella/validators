@@ -92,3 +92,26 @@ describe("email_format", function() {
     user.isValid().should.eq(true);
   });
 });
+
+describe("url_format", function() {
+  var urlFormatUser = modella('user').attr('website', { url_format: true });
+  urlFormatUser.use(validators);
+
+  it("breaks #isValid() if the field is not a url", function() {
+    var user = new urlFormatUser({website: 'test'});
+    user.isValid().should.eq(false)
+  });
+
+  it("populates #errors() if the field is not a url", function() {
+    var user = new urlFormatUser({website: 'test'});
+    user.isValid();
+    user.errors.length.should.eq(1);
+    user.errors[0].attr.should.eq('website');
+    user.errors[0].message.should.eq('is not a valid url');
+  });
+
+  it("does nothing if the field is a url", function() {
+    var user = new urlFormatUser({website: 'http://google.com'});
+    user.isValid().should.eq(true);
+  });
+});

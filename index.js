@@ -20,6 +20,10 @@ module.exports = function(Model) {
     if (attrs[attr].email_format) {
       Model.use(format(attr, exports.formatStrings.email, "is not a valid email address"));
     }
+
+    if (attrs[attr].url_format) {
+      Model.use(format(attr, exports.formatStrings.url, "is not a valid url"));
+    }
   }
 }
 
