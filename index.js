@@ -14,19 +14,17 @@ module.exports = function(Model) {
     }
 
     if (attrs[attr].format) {
-      Model.use(format(attr, attrs[attr].format));
-    }
-
-    if (attrs[attr].emailFormat) {
-      Model.use(format(attr, exports.formatStrings.email, "is not a valid email address"));
-    }
-
-    if (attrs[attr].urlFormat) {
-      Model.use(format(attr, exports.formatStrings.url, "is not a valid url"));
-    }
-
-    if (attrs[attr].phoneFormat) {
-      Model.use(format(attr, exports.formatStrings.phoneNumber, "is not a valid phone number"));
+      if (typeof attrs[attr].format == 'string') {
+        if (attrs[attr].format == 'email') {
+          Model.use(format(attr, exports.formatStrings.email, "is not a valid email address"));
+        } else if (attrs[attr].format == 'url') {
+          Model.use(format(attr, exports.formatStrings.url, "is not a valid url"));
+        } else if (attrs[attr].format == 'phone') {
+          Model.use(format(attr, exports.formatStrings.phoneNumber, "is not a valid phone number"));
+        }
+      } else {
+        Model.use(format(attr, attrs[attr].format));
+      }
     }
   }
 }

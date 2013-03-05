@@ -71,7 +71,7 @@ describe("format", function() {
 });
 
 describe("emailFormat", function() {
-  var emailFormatUser = modella('user').attr('email', { emailFormat: true });
+  var emailFormatUser = modella('user').attr('email', { format: 'email' });
   emailFormatUser.use(validators);
 
   it("breaks #isValid() if the field is not an email address", function() {
@@ -94,7 +94,7 @@ describe("emailFormat", function() {
 });
 
 describe("urlFormat", function() {
-  var urlFormatUser = modella('user').attr('website', { urlFormat: true });
+  var urlFormatUser = modella('user').attr('website', { format: 'url' });
   urlFormatUser.use(validators);
 
   it("breaks #isValid() if the field is not a url", function() {
@@ -117,7 +117,7 @@ describe("urlFormat", function() {
 });
 
 describe("phoneFormat", function() {
-  var phoneFormatUser = modella('user').attr('phone', { phoneFormat: true });
+  var phoneFormatUser = modella('user').attr('phone', { format: 'phone' });
   phoneFormatUser.use(validators);
 
   it("breaks #isValid() if the field is not a phone number", function() {
