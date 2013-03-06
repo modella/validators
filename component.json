@@ -1,11 +1,11 @@
 {
-  "name": "model-validators",
-  "repo": "rschmukler/model-validators",
+  "name": "validators",
+  "repo": "modella/validators",
   "description": "Validators for modella",
   "version": "0.0.2",
   "keywords": [],
   "dependencies": {
-    'matthewmueller/modella': '*'
+    'modella/modella': '*'
   },
   "development": {},
   "license": "MIT",

@@ -1,7 +1,7 @@
 # Model Validators
 
 A collection of validators for
-[modella](https://github.com/MatthewMueller/modella).
+[modella](https://github.com/modella/modella).
 
 ## Basic Validators
 
