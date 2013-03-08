@@ -21,6 +21,6 @@
     "modella": "~0.0.8"
   },
   "devDependencies": {
-    "chai": "~1.5.0"
+    "expect.js": "*"
   }
 }
