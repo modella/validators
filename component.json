@@ -1,11 +1,11 @@
 {
-  "name": "validators",
+  "name": "modella-validators",
   "repo": "modella/validators",
   "description": "Validators for modella",
   "version": "0.0.2",
   "keywords": [],
   "dependencies": {
-    'modella/modella': '*'
+    "modella/modella": "*"
   },
   "development": {},
   "license": "MIT",
@@ -13,6 +13,6 @@
     "index.js",
     "lib/format.js",
     "lib/required.js",
-    "lib/type.js",
+    "lib/type.js"
   ]
 }
