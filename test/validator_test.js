@@ -13,6 +13,26 @@ it("gets applied to fields defined after use of plugin", function(done) {
   LateUser.attr('test', {required: true });
 });
 
+describe("unique", function() {
+  describe("with mongo", function() {
+    it("sets the index", function(done) {
+      var mongoMock = function(Model) {
+        Model.index = function(attr, options) {
+          expect(attr).to.be('username');
+          expect(options).to.have.property('unique', true);
+          done();
+        };
+
+        Model.useSync({name: 'mongo'});
+      };
+
+      var UniqueUser = modella('user').attr('username', { unique: true });
+      UniqueUser.use(validators);
+      UniqueUser.use(mongoMock);
+    });
+  });
+});
+
 describe("required", function() {
   var RequiredUser = modella('user').attr('email', { required: true });
   RequiredUser.use(validators);
