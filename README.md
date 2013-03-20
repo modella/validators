@@ -17,10 +17,16 @@ Checks that a field is of a given type
 
     var User = User.attr('name', {type: 'string'});
 
+### Unique
+
+Depends on Modella sync layer to verify something is unique in the DB.
+
+    var User = User.attr('username', {unique: true});
+
 
 ## Format Validators
 
-Verify the value of a field against a regex pattern. model-validators
+Verify the value of a field against a regex pattern. `modella-validators`
 comes with a few regex strings built in under the `formatStrings`
 object.
 
