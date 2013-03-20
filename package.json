@@ -1,6 +1,6 @@
 {
   "name": "modella-validators",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Validators for Modella",
   "main": "index.js",
   "scripts": {
@@ -18,9 +18,10 @@
   "author": "Ryan Schmukler",
   "license": "MIT",
   "dependencies": {
-    "modella": "~0.0.8"
+    "modella": ">=0.1.0"
   },
   "devDependencies": {
-    "expect.js": "*"
+    "expect.js": "*",
+    "modella-mongo": "*"
   }
 }
