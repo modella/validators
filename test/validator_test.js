@@ -2,6 +2,17 @@ var modella    = require('modella'),
     validators = require('../index.js'),
     expect     = require('expect.js');
 
+it("gets applied to fields defined after use of plugin", function(done) {
+  var LateUser = modella('user');
+  LateUser.use(validators);
+  LateUser.once('attrAdded', function() {
+    expect(LateUser.validators).to.have.length(1);
+    done();
+  });
+
+  LateUser.attr('test', {required: true });
+});
+
 describe("required", function() {
   var RequiredUser = modella('user').attr('email', { required: true });
   RequiredUser.use(validators);
