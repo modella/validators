@@ -11,6 +11,7 @@
   "license": "MIT",
   "scripts": [
     "index.js",
+    "lib/validators.js",
     "lib/format.js",
     "lib/required.js",
     "lib/type.js"
