@@ -2,7 +2,7 @@
   "name": "modella-validators",
   "repo": "modella/validators",
   "description": "Validators for modella",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "keywords": ["validators", "modella"],
   "dependencies": {
     "modella/modella": "*"
@@ -14,7 +14,6 @@
     "lib/validators.js",
     "lib/format.js",
     "lib/required.js",
-    "lib/unique.js",
     "lib/type.js",
     "deps/type.js"
   ]

@@ -55,6 +55,11 @@ describe("type", function() {
     expect(user.errors[0]).to.have.property('message', 'should be a string');
   });
 
+  it("does nothing if the field is not present", function() {
+    var user = new TypeUser();
+    expect(user.isValid()).to.be(true);
+  });
+
   it("does nothing if the field is the right type", function() {
     var user = new TypeUser({email: 'test@gmail.com'});
     expect(user.isValid()).to.be(true);
@@ -76,6 +81,11 @@ describe("format", function() {
     expect(user.errors).to.have.length(1);
     expect(user.errors[0]).to.have.property('attr', 'email');
     expect(user.errors[0]).to.have.property('message', 'does not match format');
+  });
+
+  it("does nothing if the field is not present", function() {
+    var user = new FormatUser();
+    expect(user.isValid()).to.be(true);
   });
 
   it("does nothing if the field matches", function() {
@@ -101,6 +111,11 @@ describe("emailFormat", function() {
     expect(user.errors[0]).to.have.property('message', 'is not a valid email address');
   });
 
+  it("does nothing if the field is not present", function() {
+    var user = new EmailFormatUser();
+    expect(user.isValid()).to.be(true);
+  });
+
   it("does nothing if the field is an email address", function() {
     var user = new EmailFormatUser({email: 'test@gmail.com'});
     expect(user.isValid()).to.be(true);
@@ -124,6 +139,11 @@ describe("urlFormat", function() {
     expect(user.errors[0]).to.have.property('message', 'is not a valid url');
   });
 
+  it("does nothing if the field is not present", function() {
+    var user = new UrlFormatUser();
+    expect(user.isValid()).to.be(true);
+  });
+
   it("does nothing if the field is a url", function() {
     var user = new UrlFormatUser({website: 'http://google.com'});
     expect(user.isValid()).to.be(true);
@@ -145,6 +165,11 @@ describe("phoneFormat", function() {
     expect(user.errors).to.have.length(1);
     expect(user.errors[0]).to.have.property('attr', 'phone');
     expect(user.errors[0]).to.have.property('message', 'is not a valid phone number');
+  });
+
+  it("does nothing if the field is not present", function() {
+    var user = new PhoneFormatUser();
+    expect(user.isValid()).to.be(true);
   });
 
   it("does nothing if the field is a phone number", function() {
