@@ -38,6 +38,29 @@ describe("required", function() {
   });
 });
 
+describe("confirms", function() {
+  var ConfirmedUser = modella('user').attr('password').attr('passwordConfirmation', {confirms: 'password'});
+  ConfirmedUser.use(validators);
+
+  it("breaks #isValid() if the field doesn't match the other field", function() {
+    var user = new ConfirmedUser({password: '123456'});
+    expect(user.isValid()).to.be(false);
+  });
+
+  it("populates #errors() if the field doesn't match the other field", function() {
+    var user = new ConfirmedUser({password: '123456'});
+    user.validate();
+    expect(user.errors).to.have.length(1);
+    expect(user.errors[0]).to.have.property('attr', 'passwordConfirmation');
+    expect(user.errors[0]).to.have.property('message', 'does not match password field');
+  });
+
+  it("does nothing if the field confirms the other field", function() {
+    var user = new ConfirmedUser({password: '123456', passwordConfirmation: '123456'});
+    expect(user.isValid()).to.be(true);
+  });
+});
+
 describe("type", function() {
   var TypeUser = modella('user').attr('email', { type: 'string' });
   TypeUser.use(validators);
