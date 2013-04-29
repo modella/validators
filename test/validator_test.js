@@ -38,6 +38,29 @@ describe("required", function() {
   });
 });
 
+describe("confirms", function() {
+  var ConfirmedUser = modella('user').attr('password').attr('passwordConfirmation', {confirms: 'password'});
+  ConfirmedUser.use(validators);
+
+  it("breaks #isValid() if the field doesn't match the other field", function() {
+    var user = new ConfirmedUser({password: '123456'});
+    expect(user.isValid()).to.be(false);
+  });
+
+  it("populates #errors() if the field doesn't match the other field", function() {
+    var user = new ConfirmedUser({password: '123456'});
+    user.validate();
+    expect(user.errors).to.have.length(1);
+    expect(user.errors[0]).to.have.property('attr', 'passwordConfirmation');
+    expect(user.errors[0]).to.have.property('message', 'does not match password field');
+  });
+
+  it("does nothing if the field confirms the other field", function() {
+    var user = new ConfirmedUser({password: '123456', passwordConfirmation: '123456'});
+    expect(user.isValid()).to.be(true);
+  });
+});
+
 describe("type", function() {
   var TypeUser = modella('user').attr('email', { type: 'string' });
   TypeUser.use(validators);
@@ -53,6 +76,11 @@ describe("type", function() {
     expect(user.errors).to.have.length(1);
     expect(user.errors[0]).to.have.property('attr', 'email');
     expect(user.errors[0]).to.have.property('message', 'should be a string');
+  });
+
+  it("does nothing if the field is not present", function() {
+    var user = new TypeUser();
+    expect(user.isValid()).to.be(true);
   });
 
   it("does nothing if the field is the right type", function() {
@@ -78,6 +106,11 @@ describe("format", function() {
     expect(user.errors[0]).to.have.property('message', 'does not match format');
   });
 
+  it("does nothing if the field is not present", function() {
+    var user = new FormatUser();
+    expect(user.isValid()).to.be(true);
+  });
+
   it("does nothing if the field matches", function() {
     var user = new FormatUser({email: 'test@gmail.com'});
     expect(user.isValid()).to.be(true);
@@ -99,6 +132,11 @@ describe("emailFormat", function() {
     expect(user.errors).to.have.length(1);
     expect(user.errors[0]).to.have.property('attr', 'email');
     expect(user.errors[0]).to.have.property('message', 'is not a valid email address');
+  });
+
+  it("does nothing if the field is not present", function() {
+    var user = new EmailFormatUser();
+    expect(user.isValid()).to.be(true);
   });
 
   it("does nothing if the field is an email address", function() {
@@ -124,6 +162,11 @@ describe("urlFormat", function() {
     expect(user.errors[0]).to.have.property('message', 'is not a valid url');
   });
 
+  it("does nothing if the field is not present", function() {
+    var user = new UrlFormatUser();
+    expect(user.isValid()).to.be(true);
+  });
+
   it("does nothing if the field is a url", function() {
     var user = new UrlFormatUser({website: 'http://google.com'});
     expect(user.isValid()).to.be(true);
@@ -145,6 +188,11 @@ describe("phoneFormat", function() {
     expect(user.errors).to.have.length(1);
     expect(user.errors[0]).to.have.property('attr', 'phone');
     expect(user.errors[0]).to.have.property('message', 'is not a valid phone number');
+  });
+
+  it("does nothing if the field is not present", function() {
+    var user = new PhoneFormatUser();
+    expect(user.isValid()).to.be(true);
   });
 
   it("does nothing if the field is a phone number", function() {

@@ -11,6 +11,13 @@ Verifies that a field is present.
 
     var User = User.attr('username', {required: true});
 
+### Confirms
+
+Verifies that a field equals another field.
+
+    var User = User.attr('password')
+                   .attr('passwordConfirmation', { confirms: 'password' });
+
 ### Type
 
 Checks that a field is of a given type
