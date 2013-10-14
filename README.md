@@ -1,7 +1,15 @@
 # Model Validators
 
-A collection of validators for
+A plugin that provides a bunch of validators for
 [modella](https://github.com/modella/modella).
+
+## Example Usage
+
+    var Person = modella('Person').attr('name', { required: true }),
+        validation = require('modella-validators');
+        
+    Person.use(validation);
+    
 
 ## Basic Validators
 
