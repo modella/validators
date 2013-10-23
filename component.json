@@ -2,7 +2,7 @@
   "name": "modella-validators",
   "repo": "modella/validators",
   "description": "Validators for modella",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "keywords": ["validators", "modella"],
   "dependencies": {
     "modella/modella": "*"
