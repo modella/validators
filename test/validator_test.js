@@ -31,6 +31,15 @@ describe("required", function() {
     expect(user.errors[0]).to.have.property('attr', 'email');
     expect(user.errors[0]).to.have.property('message', 'field required');
   });
+  
+  it("populates #errors() if the field is empty string", function() {
+    var user = new RequiredUser({ email: '' });
+    user.validate();
+    expect(user.errors).to.have.length(1);
+    expect(user.errors[0]).to.have.property('attr', 'email');
+    expect(user.errors[0]).to.have.property('message', 'field required');
+  });
+
 
   it("does nothing if the field is present", function() {
     var user = new RequiredUser({email: 'test@gmail.com'});
