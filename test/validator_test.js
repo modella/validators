@@ -98,6 +98,43 @@ describe("type", function() {
   });
 });
 
+describe("instance", function() {
+  var Phone = modella('phone');
+  var InstanceUser = modella('user')
+    .attr('email', { type: String })
+    .attr('phone', { type: Phone });
+  InstanceUser.use(validators);
+
+  it("detects model fields", function () {
+    var user = new InstanceUser({phone: new Phone()});
+    // user.validate()
+    expect(user.isValid()).to.be(true);
+  });
+
+  it("breaks #isValid() if the field is the wrong type", function () {
+    var user = new InstanceUser({email: 123});
+    expect(user.isValid()).to.be(false);
+  });
+
+  it("populates #errors() if the field is the wrong type", function() {
+    var user = new InstanceUser({email: 123});
+    user.validate();
+    expect(user.errors).to.have.length(1);
+    expect(user.errors[0]).to.have.property('attr', 'email');
+    expect(user.errors[0]).to.have.property('message', 'should be a String');
+  });
+
+  it("does nothing if the field is not present", function() {
+    var user = new InstanceUser();
+    expect(user.isValid()).to.be(true);
+  });
+
+  it("does nothing if the field is the right type", function() {
+    var user = new InstanceUser({email: 'test@gmail.com'});
+    expect(user.isValid()).to.be(true);
+  });
+});
+
 describe("format", function() {
   var FormatUser = modella('user').attr('email', { format: /\w+@\w+\.com/ });
   FormatUser.use(validators);
