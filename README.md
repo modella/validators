@@ -32,6 +32,11 @@ Checks that a field is of a given type
 
     var User = User.attr('name', {type: 'string'});
 
+In addition to string support for primitives, you can also pass in a
+constructor.
+
+    var User = User.attr('parent', { type: User });
+
 ## Format Validators
 
 Verify the value of a field against a regex pattern. `modella-validators`
