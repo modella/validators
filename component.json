@@ -15,7 +15,9 @@
     "lib/confirms.js",
     "lib/format.js",
     "lib/required.js",
+    "lib/instance.js",
     "lib/type.js",
+    "deps/instance.js",
     "deps/type.js"
   ]
 }
