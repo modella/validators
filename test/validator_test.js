@@ -45,6 +45,22 @@ describe("required", function() {
     var user = new RequiredUser({email: 'test@gmail.com'});
     expect(user.isValid()).to.be(true);
   });
+
+  var RequiredUserWithBool = modella('user')
+  .attr('email', { required: true })
+  .attr('alive', { required: true, type: 'boolean' });
+  RequiredUserWithBool.use(validators);
+
+  it("allows required boolean field that is true", function() {
+    RequiredUserWithBool.use(validators);
+    var user = new RequiredUserWithBool({email: 'test@gmail.com', alive: true});
+    expect(user.isValid()).to.be(true);
+  });
+
+  it("allows required boolean field that is false", function() {
+    var user = new RequiredUserWithBool({email: 'test@gmail.com', alive: false});
+    expect(user.isValid()).to.be(true);
+  });
 });
 
 describe("confirms", function() {
