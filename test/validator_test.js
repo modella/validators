@@ -123,7 +123,6 @@ describe("instance", function() {
 
   it("detects model fields", function () {
     var user = new InstanceUser({phone: new Phone()});
-    // user.validate()
     expect(user.isValid()).to.be(true);
   });
 
