@@ -47,6 +47,14 @@ constructor.
 var User = User.attr('parent', { type: User });
 ```
 
+### Choices
+
+Checks that a field is one of the specified choices
+```js
+var User = User.attr('state', {choices: ['CONFIRMED', 'PENDING']})
+```
+
+
 ## Format Validators
 
 Verify the value of a field against a regex pattern. `modella-validators`
