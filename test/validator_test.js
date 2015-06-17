@@ -86,6 +86,40 @@ describe("confirms", function() {
   });
 });
 
+describe("choices", function() {
+  var ChoicesUser = modella('user').attr('state', { choices: ['FAILED', 'COMPLETE']})
+  ChoicesUser.use(validators);
+
+  it("does nothing if the value is one of choices", function() {
+    var user = new ChoicesUser({state: 'FAILED'});
+    expect(user.isValid()).to.be(true);
+  });
+
+  it("does nothing if the field is not present", function() {
+    var user = new ChoicesUser();
+    expect(user.isValid()).to.be(true);
+  });
+
+  it("breaks #isValid() if the value isn't in choices", function() {
+    var user = new ChoicesUser({state: 'PROCESSING'});
+    expect(user.isValid()).to.be(false);
+    expect(user.errors).to.have.length(1);
+    expect(user.errors[0]).to.have.property('attr', 'state');
+    expect(user.errors[0]).to.have.property('message', 'should be one of FAILED, COMPLETE');
+  });
+
+  var ChoicesUserNew = modella('user').attr('state', { choices: 'FAILED'})
+  ChoicesUserNew.use(validators);
+
+  it("breaks #isValid() if choices isn't an array", function() {
+    var user = new ChoicesUserNew({state: 'PROCESSING'});
+    expect(user.isValid()).to.be(false);
+    expect(user.errors).to.have.length(1);
+    expect(user.errors[0]).to.have.property('attr', 'state');
+    expect(user.errors[0]).to.have.property('message', 'choices should be an Array');
+  });
+})
+
 describe("type", function() {
   var TypeUser = modella('user').attr('email', { type: 'string' });
   TypeUser.use(validators);
