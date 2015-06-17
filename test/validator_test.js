@@ -87,7 +87,7 @@ describe("confirms", function() {
 });
 
 describe("choices", function() {
-  var ChoicesUser = modella('user').attr('state', { choices: ['FAILED', 'COMPLETE']})
+  var ChoicesUser = modella('user').attr('state', { choices: ['FAILED', 'COMPLETE']});
   ChoicesUser.use(validators);
 
   it("does nothing if the value is one of choices", function() {
@@ -108,7 +108,7 @@ describe("choices", function() {
     expect(user.errors[0]).to.have.property('message', 'should be one of FAILED, COMPLETE');
   });
 
-  var ChoicesUserNew = modella('user').attr('state', { choices: 'FAILED'})
+  var ChoicesUserNew = modella('user').attr('state', { choices: 'FAILED'});
   ChoicesUserNew.use(validators);
 
   it("breaks #isValid() if choices isn't an array", function() {
