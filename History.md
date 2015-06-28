@@ -1,4 +1,10 @@
 
+0.1.3 / 2015-06-28
+==================
+
+  * Fix for browserify static analysis on missing lib-cov dep
+  * Added choices validator
+
 0.1.2 / 2014-12-28
 ==================
 
